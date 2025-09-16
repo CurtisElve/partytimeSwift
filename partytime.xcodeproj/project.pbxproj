@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E94799BE2E36E4FA006F70C3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E94799BD2E36E4FA006F70C3 /* FirebaseAnalytics */; };
+		E94799C02E36E4FB006F70C3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E94799BF2E36E4FB006F70C3 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E94799992E36E24B006F70C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +29,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E94799882E36E249006F70C3 /* partytime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = partytime.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E94799982E36E24B006F70C3 /* partytimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = partytimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E94799A22E36E24B006F70C3 /* partytimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = partytimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E94799982E36E24B006F70C3 /* partytimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = partytimeTests.xctest; path = "/Users/curtis/Desktop/partytime/build/Debug-iphoneos/partytime.app/PlugIns/partytimeTests.xctest"; sourceTree = "<absolute>"; };
+		E94799A22E36E24B006F70C3 /* partytimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = partytimeUITests.xctest; path = "/Users/curtis/Desktop/partytime/build/Debug-iphoneos/partytimeUITests-Runner.app/PlugIns/partytimeUITests.xctest"; sourceTree = "<absolute>"; };
+		E9839A4C2E7894A000123955 /* partytime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = partytime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E9839A4E2E7894A000123955 /* Exceptions for "partytime" folder in "partytime" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E94799872E36E249006F70C3 /* partytime */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E947998A2E36E249006F70C3 /* partytime */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E9839A4E2E7894A000123955 /* Exceptions for "partytime" folder in "partytime" target */,
+			);
 			path = partytime;
 			sourceTree = "<group>";
 		};
@@ -52,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E94799BE2E36E4FA006F70C3 /* FirebaseAnalytics in Frameworks */,
+				E94799C02E36E4FB006F70C3 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,18 +98,8 @@
 				E947998A2E36E249006F70C3 /* partytime */,
 				E947999B2E36E24B006F70C3 /* partytimeTests */,
 				E94799A52E36E24B006F70C3 /* partytimeUITests */,
-				E94799892E36E249006F70C3 /* Products */,
+				E9839A4C2E7894A000123955 /* partytime.app */,
 			);
-			sourceTree = "<group>";
-		};
-		E94799892E36E249006F70C3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E94799882E36E249006F70C3 /* partytime.app */,
-				E94799982E36E24B006F70C3 /* partytimeTests.xctest */,
-				E94799A22E36E24B006F70C3 /* partytimeUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,9 +122,11 @@
 			);
 			name = partytime;
 			packageProductDependencies = (
+				E94799BD2E36E4FA006F70C3 /* FirebaseAnalytics */,
+				E94799BF2E36E4FB006F70C3 /* FirebaseAuth */,
 			);
 			productName = partytime;
-			productReference = E94799882E36E249006F70C3 /* partytime.app */;
+			productReference = E9839A4C2E7894A000123955 /* partytime.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E94799972E36E24B006F70C3 /* partytimeTests */ = {
@@ -195,8 +207,11 @@
 			);
 			mainGroup = E947997F2E36E249006F70C3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E94799BC2E36E4FA006F70C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = E94799892E36E249006F70C3 /* Products */;
+			productRefGroup = E947997F2E36E249006F70C3;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -398,6 +413,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"partytime/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = partytime/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "we gotta use your location!!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -426,6 +444,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"partytime/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = partytime/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "we gotta use your location!!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -552,6 +573,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E94799BC2E36E4FA006F70C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E94799BD2E36E4FA006F70C3 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E94799BC2E36E4FA006F70C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E94799BF2E36E4FB006F70C3 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E94799BC2E36E4FA006F70C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E94799802E36E249006F70C3 /* Project object */;
 }
