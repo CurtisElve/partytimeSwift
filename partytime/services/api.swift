@@ -21,18 +21,22 @@ class api{
         case serverError(Int, Data?)
     }
     static let shared = api()
-    static let baseurl = "http://192.168.2.219:8000"
+    static let baseurl = "http://127.0.0.1:8000"
     func request<T:Decodable>(method: String, path: String, body: Encodable? = nil, returnstruct: T.Type) async throws -> T{
         print(path)
-        let url = URL(string: path)!
+        var urlString = path
+        if !path.hasPrefix("http") {
+            urlString = api.baseurl + path
+        }
+        let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = method
         let idToken : String = await authservice.idtoken()!
         request.setValue("Bearer \(idToken)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let body = body {
-            request.httpBody = try! JSONEncoder().encode(body)
-            print(try JSONEncoder().encode(body))
+        if body != nil {
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = try! JSONEncoder().encode(body!)
+            print(try JSONEncoder().encode(body!))
         }
         let (data, response) = try! await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -75,13 +79,74 @@ class api{
     struct baseParty: Decodable, Identifiable{
         let id : Int
         let name : String
-        let description : String
-        let distance : Float
+        let description : String?
+        let distance : Float?
         let attendee_count : Int
         let max_attendees : Int
-        let start_time : Date
-        let end_time : Date
-        let hashtags : String
+        let start_time : String?
+        let end_time : String?
+        let hashtags : String?
+    }
+    
+    struct partyDetails: Decodable {
+        let id: Int
+        let name: String
+        let description: String?
+        let hashtags: String?
+        let attendee_count: Int
+        let max_attendees: Int
+        let start_time: String?
+        let end_time: String?
+        let address: String?
+        let latitude: Float?
+        let longitude: Float?
+        let media_url: String?
+        let host: HostInfo?
+        let is_saved: Bool
+        let has_request: Bool
+        let request_accepted: Bool
+        
+        struct HostInfo: Decodable {
+            let id: Int
+            let username: String
+        }
+    }
+    
+    struct activeParties: Decodable {
+        let pending_parties: [partyWithRequest]
+        let accepted_parties: [partyWithRequest]
+    }
+    
+    struct partyWithRequest: Decodable, Identifiable {
+        let id: Int
+        let name: String
+        let description: String?
+        let hashtags: String?
+        let attendee_count: Int
+        let max_attendees: Int
+        let start_time: String?
+        let end_time: String?
+        let host: partyDetails.HostInfo?
+        let request_id: Int
+        let accepted: Bool
+        let created_at: String?
+    }
+    
+    struct userProfile: Decodable {
+        let id: Int
+        let email: String?
+        let username: String
+        let phone: String?
+        let bio: String?
+        let pfpURL: String?
+        let isHost: Bool
+    }
+    
+    struct updateUser: Codable {
+        let username: String?
+        let phone: String?
+        let bio: String?
+        let pfpURL: String?
     }
     struct partylist : Decodable {
         let parties : [baseParty]
@@ -132,5 +197,33 @@ class api{
             self.host_id = host_id
             self.ticketsLeft = ticketsLeft
         }
+    }
+    struct makeparty : Codable{
+        var name:String
+        var description:String
+        var latitude:Float
+        var longitude:Float
+        var address:String
+        var starttime:String
+        var endtime:String
+        var maxattendees:Int
+        var hashtags:String
+        var image:String
+        init(name: String, description: String, latitude: Float, longitude: Float, address: String, starttime: Date, endtime: Date, maxattendees: Int, hashtags: String, image: String) {
+            self.name = name
+            self.description = description
+            self.latitude = latitude
+            self.longitude = longitude
+            self.address = address
+            self.starttime = starttime.ISO8601Format()
+            self.endtime = endtime.ISO8601Format()
+            self.maxattendees = maxattendees
+            self.hashtags = hashtags
+            self.image = image
+        }
+    }
+    
+    struct savedPartiesResponse: Decodable {
+        let saved_parties: [baseParty]
     }
 }

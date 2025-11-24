@@ -28,13 +28,30 @@ struct PartyFilterView: View {
                 TextField("search", text:self.$filters.hashtags)
                 Button(action: self.searchParties, label: {Text("search")})
             }
-            List{ ForEach(parties) { party in
-                    HStack{
-                        Text(party.name)
-                        Spacer()
-                        Button(action:{ self.join(id: party.id)}, label:{Text("join")})
+            if parties.count > 0 {
+                List {
+                    ForEach(parties) { party in
+                        NavigationLink(destination: singleParty(party: party)) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(party.name)
+                                        .font(.headline)
+                                    if let hashtags = party.hashtags {
+                                        Text(hashtags)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Text("\(party.attendee_count)/\(party.max_attendees) attendees")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
                     }
                 }
+            } else {
+                Text("dead ash in here :((")
+                Spacer()
             }
         }
         .pickerStyle(.segmented)
@@ -54,18 +71,8 @@ struct PartyFilterView: View {
             do {
                 let results = try await viewModel.filterParties(filters: self.filters)
                 self.parties = results.parties
-        } catch {
-            print("fuckfuckfuck")
-            }
-        }
-    }
-    private func join(id : Int){
-        Task{
-            do {
-                let results = try await viewModel.join(partyid: id)
-                print(results.message)
-        } catch {
-            print("fuckfuckfuck")
+            } catch {
+                print("Error searching parties: \(error)")
             }
         }
     }

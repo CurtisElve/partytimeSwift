@@ -52,7 +52,7 @@ class SignUp : ObservableObject{
     func backendRegister() async -> api.messageint{
         let newuser = api.newUser(email: username, username: "mrwhiskers", phone: "1234567890", bio:"asdfasdf")
         do{
-            return try await apii.request(method: "POST", path: api.baseurl + "/register", body:newuser.self, returnstruct: api.messageint.self)
+            return try await apii.request(method: "POST", path: "/register", body:newuser.self, returnstruct: api.messageint.self)
         }
         catch{
             print("broken back end")

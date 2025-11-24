@@ -29,9 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E94799982E36E24B006F70C3 /* partytimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = partytimeTests.xctest; path = "/Users/curtis/Desktop/partytime/build/Debug-iphoneos/partytime.app/PlugIns/partytimeTests.xctest"; sourceTree = "<absolute>"; };
-		E94799A22E36E24B006F70C3 /* partytimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = partytimeUITests.xctest; path = "/Users/curtis/Desktop/partytime/build/Debug-iphoneos/partytimeUITests-Runner.app/PlugIns/partytimeUITests.xctest"; sourceTree = "<absolute>"; };
 		E9839A4C2E7894A000123955 /* partytime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = partytime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9D593042E789BA70043E80E /* partytimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = partytimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9D593052E789BA70043E80E /* partytimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = partytimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -99,6 +99,8 @@
 				E947999B2E36E24B006F70C3 /* partytimeTests */,
 				E94799A52E36E24B006F70C3 /* partytimeUITests */,
 				E9839A4C2E7894A000123955 /* partytime.app */,
+				E9D593042E789BA70043E80E /* partytimeTests.xctest */,
+				E9D593052E789BA70043E80E /* partytimeUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,7 +151,7 @@
 			packageProductDependencies = (
 			);
 			productName = partytimeTests;
-			productReference = E94799982E36E24B006F70C3 /* partytimeTests.xctest */;
+			productReference = E9D593042E789BA70043E80E /* partytimeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E94799A12E36E24B006F70C3 /* partytimeUITests */ = {
@@ -172,7 +174,7 @@
 			packageProductDependencies = (
 			);
 			productName = partytimeUITests;
-			productReference = E94799A22E36E24B006F70C3 /* partytimeUITests.xctest */;
+			productReference = E9D593052E789BA70043E80E /* partytimeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
