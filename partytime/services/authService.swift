@@ -77,4 +77,17 @@ class authService : ObservableObject {
             return nil
         }
     }
+    func newidtoken() async -> String? {
+        guard let user = Auth.auth().currentUser else {
+            print("No user is currently signed in.")
+            return nil
+        }
+
+        do {
+            return try await user.getIDToken(forcingRefresh: true)
+        } catch {
+            print("Error getting ID token: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }

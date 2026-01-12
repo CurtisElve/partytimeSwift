@@ -13,6 +13,7 @@ protocol authServiceProtocol: AnyObject {
     func logout(completion: @escaping (Bool, Error?) -> Void)
     func whoisit() -> String
     func uid() -> String?
+    func newidtoken() async -> String?
     func idtoken() async -> String?
 }
 

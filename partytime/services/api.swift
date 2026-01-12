@@ -23,7 +23,7 @@ class api{
     }
     static let shared = api()
     static let baseurl = "http://127.0.0.1:8000"
-    func request<T:Decodable>(method: String, path: String, body: Encodable? = nil, returnstruct: T.Type) async throws -> T{
+    func request<T:Decodable>(method: String, path: String, body: Encodable? = nil, returnstruct: T.Type, usertoken : String? = nil) async throws -> T{
         print(path)
         var urlString = path
         if !path.hasPrefix("http") {
@@ -35,13 +35,19 @@ class api{
         var request = URLRequest(url: url)
         request.httpMethod = method
         
-        // Handle authentication - only add token if user is logged in
-        if let idToken = await authservice.idtoken() {
-            request.setValue("Bearer \(idToken)", forHTTPHeaderField: "Authorization")
-        } else {
-            // Only throw error if this is a protected endpoint (not a login/register endpoint)
-            if !path.contains("/register") && !path.contains("/login") {
-                throw APIError.notAuthenticated
+        if usertoken != nil{
+            request.setValue("Bearer \(usertoken!)", forHTTPHeaderField: "Authorization")
+        }
+        else{
+            // Handle authentication - only add token if user is logged in
+            if let idToken = await authservice.idtoken() {
+                request.setValue("Bearer \(idToken)", forHTTPHeaderField: "Authorization")
+            } else {
+                // Only throw error if this is a protected endpoint (not a login/register endpoint)
+                if !path.contains("/register") && !path.contains("/login") {
+                    print("ts very bad")
+                    throw APIError.notAuthenticated
+                }
             }
         }
         if body != nil {

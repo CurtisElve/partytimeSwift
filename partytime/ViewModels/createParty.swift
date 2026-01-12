@@ -19,7 +19,7 @@ class createParty : ObservableObject{
     @Published var hashtags:String
     @Published var image:String
     @Published var validated : Bool = true
-    init(name: String = "", description: String = "", latitude: Float = -1, longitude: Float = -1, address: String = "", starttime: Date = Date.now, endtime: Date = Date.now, maxattendees: Int = -1, hashtags: String = "", image: String = "") {
+    init(name: String = "", description: String = "", latitude: Float = 100, longitude: Float = 100, address: String = "", starttime: Date = Date.now, endtime: Date = Date.now, maxattendees: Int = -1, hashtags: String = "", image: String = "") {
         self.name = name
         self.description = description
         self.latitude = latitude
@@ -32,7 +32,8 @@ class createParty : ObservableObject{
         self.image = image
     }
     private func validate(){
-        validated = !name.isEmpty && !description.isEmpty && latitude != -1 && longitude != -1 && !address.isEmpty && maxattendees != -1 && !hashtags.isEmpty && !image.isEmpty
+        validated = !name.isEmpty && !description.isEmpty && !address.isEmpty && maxattendees != -1 && !hashtags.isEmpty
+        //re add longatude and latitude nullcheck in deployement - right now its pain in the ass
     }
     
     func makeApiCall() throws -> api.makeparty{
