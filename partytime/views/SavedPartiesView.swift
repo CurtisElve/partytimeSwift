@@ -59,7 +59,6 @@ struct SavedPartiesView: View {
                     }
                 }
             }
-            .navigationTitle("Saved Parties")
             .onAppear {
                 loadSavedParties()
             }

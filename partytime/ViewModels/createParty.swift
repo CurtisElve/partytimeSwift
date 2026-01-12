@@ -44,4 +44,20 @@ class createParty : ObservableObject{
             throw NSError(domain: "Validation Error", code: 1001, userInfo: nil)
         }
     }
+    
+    func makeCreatePartyRequest() -> api.createPartyRequest {
+        // Backend accepts optional fields, so we can send partial data
+        return api.createPartyRequest(
+            name: self.name,
+            description: self.description.isEmpty ? nil : self.description,
+            latitude: self.latitude == -1 ? nil : self.latitude,
+            longitude: self.longitude == -1 ? nil : self.longitude,
+            address: self.address.isEmpty ? nil : self.address,
+            startTime: self.starttime,
+            endTime: self.endtime,
+            maxAttendees: self.maxattendees <= 0 ? nil : self.maxattendees,
+            hashtags: self.hashtags.isEmpty ? nil : self.hashtags,
+            mediaUrl: self.image.isEmpty ? nil : self.image
+        )
+    }
 }

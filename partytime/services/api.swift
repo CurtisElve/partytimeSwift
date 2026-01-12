@@ -19,6 +19,7 @@ class api{
         case invalidResponse
         case decodingError(Error)
         case serverError(Int, Data?)
+        case notAuthenticated
     }
     static let shared = api()
     static let baseurl = "http://127.0.0.1:8000"
@@ -28,11 +29,21 @@ class api{
         if !path.hasPrefix("http") {
             urlString = api.baseurl + path
         }
-        let url = URL(string: urlString)!
+        guard let url = URL(string: urlString) else {
+            throw APIError.invalidURL
+        }
         var request = URLRequest(url: url)
         request.httpMethod = method
-        let idToken : String = await authservice.idtoken()!
-        request.setValue("Bearer \(idToken)", forHTTPHeaderField: "Authorization")
+        
+        // Handle authentication - only add token if user is logged in
+        if let idToken = await authservice.idtoken() {
+            request.setValue("Bearer \(idToken)", forHTTPHeaderField: "Authorization")
+        } else {
+            // Only throw error if this is a protected endpoint (not a login/register endpoint)
+            if !path.contains("/register") && !path.contains("/login") {
+                throw APIError.notAuthenticated
+            }
+        }
         if body != nil {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = try! JSONEncoder().encode(body!)
@@ -225,5 +236,83 @@ class api{
     
     struct savedPartiesResponse: Decodable {
         let saved_parties: [baseParty]
+    }
+    
+    // Host-related structs
+    struct hostParty: Decodable, Identifiable {
+        let id: Int
+        let name: String
+        let description: String?
+        let hashtags: String?
+        let attendee_count: Int
+        let max_attendees: Int
+        let start_time: String?
+        let end_time: String?
+        let address: String?
+        let latitude: Float?
+        let longitude: Float?
+    }
+    
+    struct hostPartiesResponse: Decodable {
+        let active_parties: [hostParty]
+        let past_parties: [hostParty]
+        let future_parties: [hostParty]
+    }
+    
+    struct partyRequest: Decodable, Identifiable {
+        let request_id: Int
+        let user_id: Int
+        let username: String
+        let email: String?
+        let bio: String?
+        let pfpURL: String?
+        let accepted: Bool
+        let created_at: String?
+        
+        var id: Int { request_id }
+    }
+    
+    struct partyRequestsResponse: Decodable {
+        let requests: [partyRequest]
+    }
+    
+    struct attendee: Decodable, Identifiable {
+        let user_id: Int
+        let username: String
+        let email: String?
+        let bio: String?
+        let pfpURL: String?
+        
+        var id: Int { user_id }
+    }
+    
+    struct attendeesResponse: Decodable {
+        let attendees: [attendee]
+    }
+    
+    struct createPartyRequest: Codable {
+        let name: String
+        let description: String?
+        let latitude: Float?
+        let longitude: Float?
+        let address: String?
+        let start_time: String?
+        let end_time: String?
+        let max_attendees: Int?
+        let hashtags: String?
+        let media_url: String?
+        
+        init(name: String, description: String? = nil, latitude: Float? = nil, longitude: Float? = nil, address: String? = nil, startTime: Date? = nil, endTime: Date? = nil, maxAttendees: Int? = nil, hashtags: String? = nil, mediaUrl: String? = nil) {
+            self.name = name
+            self.description = description
+            self.latitude = latitude
+            self.longitude = longitude
+            self.address = address
+            self.start_time = startTime?.ISO8601Format()
+            self.end_time = endTime?.ISO8601Format()
+            self.max_attendees = maxAttendees
+            self.hashtags = hashtags
+            self.media_url = mediaUrl
+        }
     }
 }

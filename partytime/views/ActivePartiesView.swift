@@ -76,7 +76,6 @@ struct ActivePartiesView: View {
                     }
                 }
             }
-            .navigationTitle("My Parties")
             .onAppear {
                 loadActiveParties()
             }
