@@ -1,16 +1,7 @@
-# PartyTime
+# PartyTime Client
 
-PartyTime is a iOS application built with SwiftUI focused on event discovery and ticket management. It provides a platform where users can find local events, and hosts can manage their guest lists and event logistics.
+This is the iOS front-end client for my PartyTime app. It is **stateless** and securely communicates with my custom built FastAPI backend as well as with Firebase Auth. The goal of this is to provide a space for hosts to easily monetize, manage and market their parties. Attendees will be able to discover personalized parties and can make money by referring other people to them. This is a work in progress!
 
----
-
-<div align="center">
-  <video src="https://github.com/user-attachments/assets/be5df594-c936-416b-a13a-28527b0edf9e" width="100%" controls>
-    Your browser does not support the video tag.
-  </video>
-</div>
-
----
 
 ## Architecture & Core Logic
 
@@ -22,14 +13,24 @@ The project is built using the **MVVM (Model-View-ViewModel)** pattern to ensure
     
 - **Protocol-Oriented Auth**: Authentication logic is abstracted behind an `authServiceProtocol`, allowing for cleaner dependency injection and easier testing.
     
+---
+
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/be5df594-c936-416b-a13a-28527b0edf9e" width="100%" controls>
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+*this demo doesnt use any mock data - it's all from the server and database!!*
+---
 
 ## Tech Stack
 
-- **Language**: Swift 5.10+
+- **Language**: Swift
     
 - **UI Framework**: SwiftUI
     
-- **Backend Services**: Firebase Authentication
+- **Backend Services**: Firebase Authentication,
     
 - **Networking**: Swift Concurrency (`async/await`) with `URLSession`
     
@@ -62,4 +63,6 @@ The app manages the full event lifecycle:
 - **Secure QR Tickets**: Replacing the current placeholder ticket view with a system that generates dynamic QR codes for secure door entry.
     
 - **MapKit Integration**: Adding an interactive map view to visualize event locations relative to the user's current position.
+
+- **Advanced Features**: I want to eventually move to advanced features like a party groupchat for attendees and a for-you-page of personalized parties.
 
