@@ -1,17 +1,17 @@
 # PartyTime Client
 
-This is the iOS front-end client for my PartyTime app. It is **stateless** and securely communicates with my custom built FastAPI backend as well as with Firebase Auth. The goal of this is to provide a space for hosts to easily monetize, manage and market their parties. Attendees will be able to discover personalized parties and can make money by referring other people to them. This is a work in progress!
+This is the iOS front-end client for my PartyTime app. It is **stateless** and talks to my custom built FastAPI backend. It manages users with Firebase Auth. This app will allow hosts to easily monetize, manage, and market their parties. Attendees will see personalized parties and refer other people. This is a work in progress!!
 
 
 ## Architecture & Core Logic
 
-The project is built using the **MVVM (Model-View-ViewModel)** pattern to ensure a clean separation of concerns and a reactive UI.
+The project is organized using the **MVVM (Model-View-ViewModel)** pattern.
 
 - **Generic Networking Layer**: I implemented a centralized `api` class that utilizes a single generic `request<T: Decodable>` method. This method handles URL construction, header injection, JSON encoding/decoding, and error handling for the entire application.
     
 - **Type Safety**: Every data model in the app (e.g., `partyDetails`, `userProfile`, `hostParty`) is designed as a `Codable` struct that matches the backend's JSON schema 1:1. This eliminates the need for manual data parsing and ensures high reliability across network calls.
     
-- **Protocol-Oriented Auth**: Authentication logic is abstracted behind an `authServiceProtocol`, allowing for cleaner dependency injection and easier testing.
+- **Protocol-Oriented Auth**: Authentication logic is abstracted behind an `authServiceProtocol`, allowing for clean dependency injection later on.
     
 ---
 
@@ -30,7 +30,7 @@ The project is built using the **MVVM (Model-View-ViewModel)** pattern to ensure
     
 - **UI Framework**: SwiftUI
     
-- **Backend Services**: Firebase Authentication,
+- **Backend Services**: Firebase Authentication, my backend API
     
 - **Networking**: Swift Concurrency (`async/await`) with `URLSession`
     
