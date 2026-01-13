@@ -1,6 +1,6 @@
 # PartyTime Client
 
-This is the iOS front-end client for my PartyTime app. It is **stateless** and talks to my custom built FastAPI backend. It manages users with Firebase Auth. This app will allow hosts to easily monetize, manage, and market their parties. Attendees will see personalized parties and refer other people. This is a work in progress!!
+This is the iOS front-end client for my PartyTime app. It is **stateless** and talks to my custom-built FastAPI backend. It manages users with Firebase Auth. This app will allow hosts to easily monetize, manage, and market their parties. Attendees will see personalized parties and refer other people. This is a work in progress!!
 
 
 ## Architecture & Core Logic
